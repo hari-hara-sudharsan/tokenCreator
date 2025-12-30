@@ -1,0 +1,39 @@
+# 1️⃣ Base image
+FROM node:20-alpine AS builder
+
+# 2️⃣ Set working directory
+WORKDIR /app
+
+# 3️⃣ Copy package files
+COPY package.json package-lock.json* ./
+
+# 4️⃣ Install dependencies
+RUN npm install
+
+# 5️⃣ Copy rest of the code
+COPY . .
+
+# 6️⃣ Build Next.js app
+RUN npm run build
+
+# ----------------------------
+
+# 7️⃣ Production image
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+# 8️⃣ Copy build output
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/next.config.js ./next.config.js
+
+# 9️⃣ Expose port
+EXPOSE 3000
+
+# 🔟 Start app
+CMD ["npm", "start"]
