@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { FeaturesGrid } from "@/components/features-grid"
@@ -21,7 +21,10 @@ export default function Home() {
     <div className="min-h-screen bg-black text-white">
 
       {/* ✅ THIS WAS MISSING */}
-      <Header />
+      <Suspense fallback={null}>
+          <Header />
+      </Suspense>
+      
 
       <main className="pt-16">
         <HeroSection />
