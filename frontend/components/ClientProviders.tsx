@@ -1,9 +1,13 @@
 "use client"
 
 import { Suspense } from "react"
-import dynamic from "next/dynamic"
+import nextDynamic from "next/dynamic"
 
-const WalletProvider = dynamic(
+/**
+ * 🚫 WalletProvider uses browser-only hooks (useSearchParams / window.ethereum)
+ * ✅ Must be loaded CLIENT-ONLY with SSR disabled
+ */
+const WalletProvider = nextDynamic(
   () => import("@/context/WalletContext").then((m) => m.WalletProvider),
   { ssr: false }
 )
