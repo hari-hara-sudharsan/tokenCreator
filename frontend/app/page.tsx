@@ -9,6 +9,8 @@ import { AddLiquiditySection } from "@/components/add-liquidity"
 import { TrustScoreCard } from "@/components/trust-score"
 import { Footer } from "@/components/footer"
 import { MyTokens } from "@/components/my-tokens"
+export const dynamic = "force-dynamic"
+
 
 
 
