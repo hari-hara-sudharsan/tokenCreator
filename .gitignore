@@ -27,3 +27,11 @@ node_modules
 .env*
 .env.local
 .DS_Store
+.env
+.env.development
+dist
+out
+.vscode
+.env.production
+
+typechain-types

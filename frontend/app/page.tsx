@@ -2,12 +2,6 @@
 
 import { Suspense } from "react"
 import nextDynamic from "next/dynamic"
-
-// 🚨 IMPORTANT: client-only header (NO SSR)
-const Header = nextDynamic(() => import("@/components/header").then((mod) => mod.Header), {
-  ssr: false,
-})
-
 import { HeroSection } from "@/components/hero-section"
 import { FeaturesGrid } from "@/components/features-grid"
 import { CreateTokenForm } from "@/components/create-token"
@@ -15,6 +9,13 @@ import { AddLiquiditySection } from "@/components/add-liquidity"
 import { TrustScoreCard } from "@/components/trust-score"
 import { Footer } from "@/components/footer"
 import { MyTokens } from "@/components/my-tokens"
+// import { TokenPreview } from "@/components/create-token/TokenPreview"
+// import { SecurityInfo } from "@/components/create-token/SecurityInfo"
+
+// 🚨 IMPORTANT: client-only header (NO SSR)
+const Header = nextDynamic(() => import("@/components/header").then((mod) => mod.Header), {
+  ssr: false,
+})
 
 // 🚫 Disable prerender completely for home
 export const dynamic = "force-dynamic"
@@ -49,6 +50,17 @@ export default function Home() {
           <div className="max-w-2xl mx-auto mt-12">
             <MyTokens />
           </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <CreateTokenForm />
+
+            <div>
+              {/* TODO: Connect state to CreateTokenForm */}
+              {/* <TokenPreview name="" symbol="" /> */}
+              {/* <SecurityInfo /> */}
+            </div>
+          </div>
+
         </div>
       </main>
 

@@ -18,12 +18,16 @@ contract LiquidityLock {
         require(block.timestamp >= unlockTime, "Liquidity still locked");
         require(!burned, "LP burned forever");
 
-        IERC20(lpToken).transfer(owner, IERC20(lpToken).balanceOf(address(this)));
+        IERC20(lpToken).transfer(
+            owner,
+            IERC20(lpToken).balanceOf(address(this))
+        );
     }
 
     function burnLP(address lpToken) external {
         require(msg.sender == owner, "Not owner");
         burned = true;
+
         IERC20(lpToken).transfer(
             address(0),
             IERC20(lpToken).balanceOf(address(this))

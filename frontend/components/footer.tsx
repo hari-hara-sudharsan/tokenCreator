@@ -13,7 +13,7 @@ export function Footer() {
               SafeMint
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              The trusted platform for secure and transparent token launches on the blockchain.
+              The trusted platform for secure and transparent token launches on the QIE blockchain.
             </p>
           </div>
 
@@ -22,17 +22,17 @@ export function Footer() {
             <h4 className="text-white font-semibold mb-4">Product</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <Link href="/create-token" className="hover:text-[#D4AF37] transition-colors">
+                <Link href="/#create" className="hover:text-[#D4AF37] transition-colors">
                   Create Token
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard" className="hover:text-[#D4AF37] transition-colors">
+                <Link href="/#add-liquidity" className="hover:text-[#D4AF37] transition-colors">
                   Lock Liquidity
                 </Link>
               </li>
               <li>
-                <Link href="/trust-score" className="hover:text-[#D4AF37] transition-colors">
+                <Link href="/explorer" className="hover:text-[#D4AF37] transition-colors">
                   Trust Score
                 </Link>
               </li>
@@ -50,12 +50,12 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
                 <a
-                  href="https://docs.qie.network"
+                  href="https://docs.qie.digital"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#D4AF37] transition-colors"
                 >
-                  QIE Documentation
+                  QIE Official Docs
                 </a>
               </li>
               <li>
@@ -137,7 +137,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">
-            © 2025 SafeMint. All rights reserved.
+            © 2025 SafeMint. Built on QIE Mainnet.
           </p>
           <div className="flex gap-6 text-sm text-gray-400">
             <Link href="/privacy" className="hover:text-[#D4AF37] transition-colors">

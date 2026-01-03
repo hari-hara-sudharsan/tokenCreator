@@ -1,56 +1,44 @@
 // lib/contracts.ts
+import { ethers } from "ethers"
+import SafeMintFactoryABI from "./abi/SafeMintFactory.json"
 
-export const SAFEMINT_FACTORY_ADDRESS =
-  "0x65d52515dcE4e8481aD7aA889F1343d8a0FE0B8d"
+/* ===================== NETWORK ===================== */
 
-export const SAFEMINT_FACTORY_ABI = [
-  /* ---------------- CREATE TOKEN ---------------- */
-  {
-    inputs: [
-      { internalType: "string", name: "name", type: "string" },
-      { internalType: "string", name: "symbol", type: "string" },
-      { internalType: "uint256", name: "totalSupply", type: "uint256" },
-      { internalType: "uint256", name: "lockMonths", type: "uint256" }
-    ],
-    name: "createToken",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
+export const QIE_CHAIN_ID = 1990
 
-  /* ---------------- READ FUNCTIONS ---------------- */
-  {
-    inputs: [],
-    name: "getAllTokens",
-    outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
-    stateMutability: "view",
-    type: "function"
-  },
-
-  {
-    inputs: [{ internalType: "address", name: "", type: "address" }],
-    name: "tokenInfo",
-    outputs: [
-      { internalType: "address", name: "token", type: "address" },
-      { internalType: "address", name: "creator", type: "address" },
-      { internalType: "uint8", name: "score", type: "uint8" },
-      { internalType: "address", name: "liquidityLock", type: "address" },
-      { internalType: "uint256", name: "lockExpiry", type: "uint256" },
-      { internalType: "bool", name: "liquidityAdded", type: "bool" }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-  inputs: [
-    { internalType: "address", name: "token", type: "address" },
-    { internalType: "uint256", name: "tokenAmount", type: "uint256" }
-  ],
-  name: "addLiquidityAndLock",
-  outputs: [],
-  stateMutability: "payable",
-  type: "function"
+export const QIE_NETWORK = {
+  chainId: "0x7c6", // 1990
+  name: "QIE Mainnet",
+  rpcUrl: "https://localhost:8545", // 🔒 SSL proxy ONLY
 }
 
+/* ===================== CONTRACT ===================== */
 
-]
+export const SAFEMINT_FACTORY_ADDRESS =
+  "0x4A3aD56F24Ecb5CB4A3307a3d871e027A38CD358"
+
+export const SAFEMINT_FACTORY_ABI = SafeMintFactoryABI
+
+/* ===================== PROVIDERS ===================== */
+
+/**
+ * 🔒 READ-ONLY PROVIDER (via SSL proxy)
+ * NO detection
+ * NO fallback
+ * NO spam
+ */
+export const readProvider = new ethers.JsonRpcProvider(
+  QIE_NETWORK.rpcUrl,
+  QIE_CHAIN_ID,
+  { staticNetwork: true }
+)
+
+/**
+ * ✅ WRITE provider (MetaMask ONLY)
+ */
+export const getWriteProvider = async () => {
+  if (!(window as any).ethereum) {
+    throw new Error("MetaMask not found")
+  }
+  return new ethers.BrowserProvider((window as any).ethereum)
+}

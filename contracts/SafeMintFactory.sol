@@ -11,16 +11,17 @@ contract SafeMintFactory {
     enum TrustScore { RED, YELLOW, GREEN }
 
     struct TokenInfo {
-    address token;
-    address creator;
-    TrustScore score;
-    address liquidityLock;
-    uint256 lockExpiry;
-    bool liquidityAdded;
-}
+        address token;
+        address creator;
+        TrustScore score;
+        address liquidityLock;
+        uint256 lockExpiry;
+        bool liquidityAdded;
+    }
 
-
+    // QIE AMM ROUTER (PASSED AT DEPLOYMENT)
     address public router;
+
     mapping(address => TokenInfo) public tokenInfo;
     address[] public allTokens;
 
@@ -28,19 +29,16 @@ contract SafeMintFactory {
     event LiquidityLocked(address token, uint256 ethAmount, uint256 tokenAmount);
 
     constructor(address _router) {
+        require(_router != address(0), "Invalid router");
         router = _router;
     }
 
-    // -------------------------
-    // DAY-1 + DAY-2 (unchanged)
-    // -------------------------
     function createToken(
         string memory name,
         string memory symbol,
         uint256 totalSupply,
         uint256 lockMonths
     ) external {
-
         require(lockMonths == 6 || lockMonths == 12, "Lock must be 6 or 12 months");
 
         SafeMintToken token = new SafeMintToken(
@@ -66,25 +64,19 @@ contract SafeMintFactory {
         emit TokenCreated(address(token), msg.sender);
     }
 
-    // -------------------------
-    // ⭐ DAY-3 CORE FUNCTION ⭐
-    // -------------------------
     function addLiquidityAndLock(
         address token,
         uint256 tokenAmount
     ) external payable {
-
         TokenInfo storage info = tokenInfo[token];
 
         require(msg.sender == info.creator, "Not token creator");
         require(!info.liquidityAdded, "Liquidity already added");
-        require(msg.value > 0, "ETH required");
+        require(msg.value > 0, "QIE required");
 
-        // Approve router to pull tokens
         IERC20(token).approve(router, tokenAmount);
 
-        // Add liquidity — LP tokens go DIRECTLY to LiquidityLock
-        IUniswapV2Router02(router).addLiquidityETH{value: msg.value}(
+        IUniswapV2Router02(router).addLiquidityETH{ value: msg.value }(
             token,
             tokenAmount,
             0,
@@ -94,7 +86,6 @@ contract SafeMintFactory {
         );
 
         info.liquidityAdded = true;
-
         emit LiquidityLocked(token, msg.value, tokenAmount);
     }
 
@@ -102,4 +93,3 @@ contract SafeMintFactory {
         return allTokens;
     }
 }
-

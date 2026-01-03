@@ -43,7 +43,7 @@ export default function TokenDetailPage() {
 
     const load = async () => {
       try {
-        const provider = new ethers.BrowserProvider(window.ethereum)
+        const provider = new ethers.BrowserProvider(window.ethereum as any)
         const factory = new ethers.Contract(
           SAFEMINT_FACTORY_ADDRESS,
           SAFEMINT_FACTORY_ABI,
