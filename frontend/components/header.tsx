@@ -155,7 +155,7 @@ export function Header() {
             </a>
             
             <a 
-              href="#create" 
+              href="/CreateTokenForm" 
               className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all group"
               onClick={() => setMobileMenuOpen(false)}
             >
