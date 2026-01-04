@@ -156,7 +156,7 @@ Make sure you have:
 ---
 ## Resources and Documentations
 
-- [QIE Official Docs](https://docs.qie.digital/))
+- [QIE Official Docs](https://docs.qie.digital/)
 - [QIE Developer Docs](https://docs.qie.digital/developer-docs)
 - [QIE Github](https://github.com/Qi-Blockchain)
 - [QIE Mainnet](http://www.mainnet.qie.digital/)
