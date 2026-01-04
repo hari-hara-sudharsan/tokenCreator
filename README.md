@@ -83,13 +83,57 @@ Users instantly know whether a token is safe before buying.
 ## High-Level Architecture
 
 ```mermaid
-flowchart LR
-    U[User / Creator] --> T[Token Creator]
-    T --> L[Liquidity Pool]
-    L -->|Lock Liquidity| LL[Locked Liquidity Vault]
-    T --> S[Trust Score]
-    S --> UI[QIEDEX SafeMint Front Page]
-    Buyers[Buyers] --> UI
+flowchart TB
+    %% =====================
+    %% Actors
+    %% =====================
+    Creator[Creator / Token Owner]
+    Buyer[Buyers / Investors]
+
+    %% =====================
+    %% Presentation Layer
+    %% =====================
+    UI[QIEDEX SafeMint<br/>Web / DApp UI]
+
+    %% =====================
+    %% Application Layer
+    %% =====================
+    Backend[Application Backend]
+    TokenSvc[Token Creation Service]
+    TrustSvc[Trust Score Engine]
+
+    %% =====================
+    %% Blockchain Layer
+    %% =====================
+    Chain[(Blockchain Network)]
+    Token[Deployed Token Contract]
+    Liquidity[Liquidity Pool]
+    Lock[Liquidity Lock Vault]
+
+    %% =====================
+    %% User Flow
+    %% =====================
+    Creator --> UI
+    Buyer --> UI
+
+    %% =====================
+    %% System Flow
+    %% =====================
+    UI --> Backend
+
+    Backend --> TokenSvc
+    Backend --> TrustSvc
+
+    TokenSvc --> Token
+    TokenSvc --> Liquidity
+
+    Liquidity -->|Lock Liquidity| Lock
+
+    TrustSvc --> UI
+    Token --> Chain
+    Liquidity --> Chain
+    Lock --> Chain
+
 ```
 
 
