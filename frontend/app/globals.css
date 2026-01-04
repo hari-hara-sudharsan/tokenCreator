@@ -4,8 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -120,29 +118,394 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* No @apply using bg-background/text-foreground here */
+/* ============================================
+   SUPREME PREMIUM BODY STYLES
+   ============================================ */
 
 body {
-  background-color: var(--background);
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+  background-attachment: fixed;
   color: var(--foreground);
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Custom scrollbar */
+/* Animated Background Gradients */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 50%, rgba(0, 191, 255, 0.06) 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+  animation: backgroundFloat 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.03) 50%, transparent 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(212, 175, 55, 0.02) 2px, rgba(212, 175, 55, 0.02) 4px);
+  animation: gridSlide 30s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   SUPREME SCROLLBAR DESIGN
+   ============================================ */
+
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 14px;
+  height: 14px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4af37;
-  border-radius: 5px;
+  background: linear-gradient(180deg, #d4af37 0%, #ffd700 50%, #d4af37 100%);
+  border-radius: 10px;
+  border: 2px solid #000000;
+  box-shadow: 
+    0 0 10px rgba(212, 175, 55, 0.5),
+    inset 0 0 10px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffd700;
+  background: linear-gradient(180deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+  box-shadow: 
+    0 0 20px rgba(255, 215, 0, 0.8),
+    inset 0 0 15px rgba(255, 237, 78, 0.5);
+  transform: scale(1.1);
 }
 
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #d4af37 0%, #b8941f 50%, #d4af37 100%);
+}
 
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 #000000;
+}
+
+/* ============================================
+   SUPREME PREMIUM ANIMATIONS
+   ============================================ */
+
+@keyframes backgroundFloat {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(5%, 5%) rotate(5deg);
+  }
+  50% {
+    transform: translate(-3%, 8%) rotate(-3deg);
+  }
+  75% {
+    transform: translate(-8%, -5%) rotate(8deg);
+  }
+}
+
+@keyframes gridSlide {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 100px 0, 0 100px;
+  }
+}
+
+@keyframes shimmerGold {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   UTILITY ANIMATION CLASSES
+   ============================================ */
+
+.animate-shimmer-gold {
+  background-size: 200% 100%;
+  animation: shimmerGold 3s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotateSlow 20s linear infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+}
+
+.animate-ripple {
+  animation: ripple 1.5s ease-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* ============================================
+   PREMIUM EFFECTS & UTILITIES
+   ============================================ */
+
+/* Glass Morphism Effect */
+.glass-effect {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Glow Effects */
+.glow-gold {
+  box-shadow: 
+    0 0 20px rgba(212, 175, 55, 0.3),
+    0 0 40px rgba(212, 175, 55, 0.2),
+    inset 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+.glow-cyan {
+  box-shadow: 
+    0 0 20px rgba(0, 191, 255, 0.3),
+    0 0 40px rgba(0, 191, 255, 0.2),
+    inset 0 0 20px rgba(0, 191, 255, 0.1);
+}
+
+.glow-emerald {
+  box-shadow: 
+    0 0 20px rgba(50, 205, 50, 0.3),
+    0 0 40px rgba(50, 205, 50, 0.2),
+    inset 0 0 20px rgba(50, 205, 50, 0.1);
+}
+
+/* Text Glow */
+.text-glow-gold {
+  text-shadow: 
+    0 0 10px rgba(212, 175, 55, 0.8),
+    0 0 20px rgba(212, 175, 55, 0.5),
+    0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+/* Gradient Borders */
+.border-gradient-gold {
+  border: 2px solid transparent;
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+              linear-gradient(135deg, #d4af37, #ffd700, #d4af37) border-box;
+}
+
+/* Premium Hover States */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+/* Premium Focus States */
+*:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.6);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Selection Styling */
+::selection {
+  background-color: rgba(212, 175, 55, 0.3);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: rgba(212, 175, 55, 0.3);
+  color: #ffffff;
+}
+
+/* ============================================
+   SMOOTH SCROLLING & PERFORMANCE
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hardware Acceleration for Animations */
+.animate-shimmer-gold,
+.animate-pulse-glow,
+.animate-float-slow,
+.animate-rotate-slow,
+.animate-gradient-shift {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* ============================================
+   RESPONSIVE OPTIMIZATIONS
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  body::before,
+  body::after {
+    animation: none !important;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  body::before,
+  body::after {
+    animation-duration: 30s;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+}

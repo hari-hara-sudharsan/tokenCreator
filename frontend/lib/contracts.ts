@@ -9,7 +9,7 @@ export const QIE_CHAIN_ID = 1990
 export const QIE_NETWORK = {
   chainId: "0x7c6", // 1990
   name: "QIE Mainnet",
-  rpcUrl: "https://localhost:8545", // 🔒 SSL proxy ONLY
+  rpcUrl: "https://rpc2mainnet.qie.digital/", // ✅ PUBLIC READ RPC
 }
 
 /* ===================== CONTRACT ===================== */
@@ -22,10 +22,10 @@ export const SAFEMINT_FACTORY_ABI = SafeMintFactoryABI
 /* ===================== PROVIDERS ===================== */
 
 /**
- * 🔒 READ-ONLY PROVIDER (via SSL proxy)
- * NO detection
- * NO fallback
- * NO spam
+ * ✅ READ-ONLY PROVIDER (PUBLIC RPC)
+ * - Works in browser
+ * - No MetaMask
+ * - No SSL issues
  */
 export const readProvider = new ethers.JsonRpcProvider(
   QIE_NETWORK.rpcUrl,
@@ -35,6 +35,7 @@ export const readProvider = new ethers.JsonRpcProvider(
 
 /**
  * ✅ WRITE provider (MetaMask ONLY)
+ * untouched
  */
 export const getWriteProvider = async () => {
   if (!(window as any).ethereum) {
