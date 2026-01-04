@@ -6,13 +6,53 @@ Instead of letting anyone create dangerous tokens, QIEDEX enforces **fair launch
 This project is built for the **QIE Blockchain**.
 
 ---
-## How to Run the Project (Using Docker)
+## How to Run the Project for Judges
+You have three options to run the application, depending on your setup.
+
+### Option 1: Quick Start via Docker Hub (Recommended)
+The easiest way to check the project is by pulling the pre-built image.
 
 ```bash
-docker run -p 4000:4000 madhesh00/qie-indexer:latest[http://localhost:4000]
-docker run -p 5173:80 madhesh00/qie-frontend:latest[http://localhost:5713]
-docker compose up
-````
+docker pull madhesh00/tokencreator-frontend
+docker run -p 3000:3000 madhesh00/tokencreator-frontend
+```
+*   **Access the App:** Open `http://localhost:3000`
+
+### Option 2: Run via Docker Compose (Build Locally)
+If you want to build the latest version from the source code directly.
+
+1.  **Clone the Repository** (if you haven't already):
+    ```bash
+    git clone https://github.com/hari-hara-sudharsan/Blockchain-TokenCreator.git
+    cd Blockchain-TokenCreator
+    ```
+2.  **Run with Docker Compose**:
+    ```bash
+    docker-compose up --build
+    ```
+*   **Access the App:** Open `http://localhost:3000`
+
+### Option 3: Manual Setup (Development Mode)
+If you prefer running without Docker/Containers.
+
+1.  **Clone the Repository**:
+    ```bash
+    git clone https://github.com/hari-hara-sudharsan/Blockchain-TokenCreator.git
+    cd Blockchain-TokenCreator/frontend
+    ```
+2.  **Install Dependencies**:
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    ```
+3.  **Run Development Server**:
+    ```bash
+    npm run dev
+    ```
+*   **Access the App:** Open `http://localhost:3000` (or the port shown in terminal)
 
 ---
 ## What Problem This Solves
